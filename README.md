@@ -51,7 +51,7 @@ The existing PHP namespaces remain `WilyCode\Template\Extension` and `WilyCode\T
 | `ltrim` | Trim left | `{{ $name \| ltrim }}` |
 | `rtrim` | Trim right | `{{ $name \| rtrim }}` |
 | `length` | UTF-8 string length or count of an array/Countable | `{{ $tags \| length }}` |
-| `truncate` | Shorten text; default length 12 and suffix `...` | `{{ $text \| truncate(20, '...') }}` |
+| `truncate` | Shorten text; default length 12 and suffix `...` | `{{ $text \| truncate(20) }}` |
 | `replace` | Literal replacement | `{{ $name \| replace(' ', '-') }}` |
 | `regex_replace` | PCRE replacement | `{{ $name \| regex_replace('/\\s+/', '-') }}` |
 | `slug` | Unicode-aware URL segment; no ASCII transliteration | `{{ $title \| slug }}` |
@@ -68,6 +68,8 @@ For example, in `home.tpl`:
 
 The `slug` filter preserves Unicode letters, including Polish diacritics. It does not transliterate to ASCII. `regex_replace` accepts regular expressions from trusted template authors; do not construct regex patterns from untrusted input.
 
+By default, `truncate` appends **three ordinary dots** (`...`) when shortening text, not the single Unicode ellipsis character (`…`). To override the suffix, use `{{ $text | truncate(20, '…') }}`.
+
 ### Custom defaults
 
 All options are optional:
@@ -76,7 +78,7 @@ All options are optional:
 $engine->addExtension(new TemplateStringFilterExtension(
     encoding: 'UTF-8',
     defaultTruncateLength: 40,
-    defaultTruncateSuffix: '…',
+    defaultTruncateSuffix: ' (more)',
     defaultPriceDecimals: 2,
     defaultPriceDecimalSeparator: ',',
     defaultPriceThousandsSeparator: ' ',
