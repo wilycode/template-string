@@ -17,6 +17,8 @@ use Exception;
  */
 final class StringUtils
 {
+    public const DEFAULT_TRUNCATE_SUFFIX = '...';
+
     private function __construct()
     {
     }
@@ -76,7 +78,7 @@ final class StringUtils
     public static function truncate(
         string $value,
         int $length = 12,
-        string $suffix = '...',
+        string $suffix = self::DEFAULT_TRUNCATE_SUFFIX,
         string $encoding = 'UTF-8'
     ): string {
         if ($length <= 0) {
