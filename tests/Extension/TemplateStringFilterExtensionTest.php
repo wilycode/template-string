@@ -30,6 +30,8 @@ final class TemplateStringFilterExtensionTest extends TestCase
         self::assertSame('  abc', $engine->applyFilter('rtrim', '  abc  '));
         self::assertSame(4, $engine->applyFilter('length', 'Żółć'));
         self::assertSame('Hello...', $engine->applyFilter('truncate', 'Hello world', 5));
+        self::assertSame('Zażół...', $engine->applyFilter('truncate', 'Zażółć gęślą jaźń', 5));
+        self::assertSame('Zażół…', $engine->applyFilter('truncate', 'Zażółć gęślą jaźń', 5, '…'));
         self::assertSame('a-b', $engine->applyFilter('replace', 'a b', ' ', '-'));
         self::assertSame('a-b', $engine->applyFilter('regex_replace', 'a  b', '/\s+/', '-'));
         self::assertSame('zażółć-gęślą-jaźń', $engine->applyFilter('slug', 'Zażółć gęślą jaźń'));

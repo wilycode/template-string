@@ -74,8 +74,11 @@ final class StringUtilsTest extends TestCase
 
     public function testTruncateTruncatesAndAppendsSuffix(): void
     {
+        self::assertSame('...', StringUtils::DEFAULT_TRUNCATE_SUFFIX);
         self::assertSame('Hello...', StringUtils::truncate('Hello world', 5));
+        self::assertSame('Zażół...', StringUtils::truncate('Zażółć gęślą jaźń', 5));
         self::assertSame('Hello (more)', StringUtils::truncate('Hello world', 5, ' (more)'));
+        self::assertSame('Hello…', StringUtils::truncate('Hello world', 5, '…'));
     }
 
     public function testTruncateWithNonPositiveLengthReturnsEmptyString(): void

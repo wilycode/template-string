@@ -25,7 +25,7 @@ final class TemplateStringFilterExtension implements TemplateExtensionInterface
     public function __construct(
         private readonly string $encoding = 'UTF-8',
         private readonly int $defaultTruncateLength = 12,
-        private readonly string $defaultTruncateSuffix = '...',
+        private readonly string $defaultTruncateSuffix = StringUtils::DEFAULT_TRUNCATE_SUFFIX,
         private readonly int $defaultPriceDecimals = 2,
         private readonly string $defaultPriceDecimalSeparator = ',',
         private readonly string $defaultPriceThousandsSeparator = ' '
